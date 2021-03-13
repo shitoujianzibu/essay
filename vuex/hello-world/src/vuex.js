@@ -1,5 +1,10 @@
 let Vue
 
+const forEach = function (obj, cb) {
+  Object.keys(obj).forEach(key => {
+    cb(key, obj[key])
+  })
+}
 class Store {
   constructor (options) {
     // console.log(options)
@@ -16,11 +21,11 @@ class Store {
     let getters = options.getters || {}
     // 这个是挂载getters
     this.getters = {}
-    Object.keys(getters).forEach(getter => {
+    forEach(getters, (getter, value) => {
       Object.defineProperty(this.getters, getter, {
         get: () => {
           // console.log(this)
-          return getters[getter](this.state)
+          return value(this.state)
         }
       })
     })
@@ -28,15 +33,27 @@ class Store {
     /* ----------------mutations start------------------- */
     let mutations = options.mutations || {}
     this.mutations = {}
-    Object.keys(mutations).forEach(mutation => {
+    forEach(mutations, (mutation, value) => {
       this.mutations[mutation] = (payload) => {
-        mutations[mutation](this.state, payload)
+        value(this.state, payload)
       }
     })
-    console.log(this.mutations)
+    /* ----------------mutations end------------------- */
+    /* ----------------actions start------------------- */
+    let actions = options.actions
+    this.actions = {}
+    forEach(actions, (action, value) => {
+      this.actions[action] = (payload) => {
+        value(this, payload)
+      }
+    })
+
   }
-  commit (type, payload) {
+  commit = (type, payload) => {
     this.mutations[type](payload)
+  }
+  dispatch = (type, payload) => {
+    this.actions[type](payload)
   }
   get state () {
     return this._s.state

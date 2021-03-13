@@ -18,9 +18,17 @@ export default new Vuex.Store({
   mutations: {
     add (state, payload) {
       state.age += payload
+    },
+    asyncSub (state, payload) {
+      state.age -= payload
     }
   },
   actions: {
-    
+    asyncSub ({ commit }, payload) {
+      console.log(...arguments)
+      setTimeout(() => {
+        commit('asyncSub', payload)
+      }, 2000)
+    }
   }
 })
