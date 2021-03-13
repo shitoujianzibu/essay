@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     test-vuex
-    <HelloWorld></HelloWorld>
+    <HelloWorld msg="vuex"></HelloWorld>
   </div>
 </template>
 

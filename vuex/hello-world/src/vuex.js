@@ -12,17 +12,31 @@ class Store {
     })
     // console.log(this.state)
     // 得到仓库的getters
+    /* ----------------getters start------------------- */
     let getters = options.getters || {}
     // 这个是挂载getters
     this.getters = {}
     Object.keys(getters).forEach(getter => {
       Object.defineProperty(this.getters, getter, {
         get: () => {
-          console.log(this)
+          // console.log(this)
           return getters[getter](this.state)
         }
       })
     })
+    /* ----------------getters end------------------- */
+    /* ----------------mutations start------------------- */
+    let mutations = options.mutations || {}
+    this.mutations = {}
+    Object.keys(mutations).forEach(mutation => {
+      this.mutations[mutation] = (payload) => {
+        mutations[mutation](this.state, payload)
+      }
+    })
+    console.log(this.mutations)
+  }
+  commit (type, payload) {
+    this.mutations[type](payload)
   }
   get state () {
     return this._s.state

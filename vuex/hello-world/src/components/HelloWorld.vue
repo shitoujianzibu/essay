@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1 @click="add">{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -38,7 +38,13 @@ export default {
   },
   mounted () {
     // console.log(this.$store)
-    console.log(this.$store.getters.getName)
+    console.log(this.$store.getters.getAge)
+  },
+  methods: {
+    add () {
+      this.$store.commit('add', 1)
+      console.log(this.$store.getters.getAge)
+    }
   }
 }
 </script>
