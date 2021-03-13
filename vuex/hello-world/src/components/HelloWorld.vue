@@ -37,7 +37,8 @@ export default {
     msg: String
   },
   mounted () {
-    console.log(this.$store)
+    // console.log(this.$store)
+    console.log(this.$store.getters.getName)
   }
 }
 </script>

@@ -9,6 +9,9 @@ export default new Vuex.Store({
   getters: {
     getName (state) {
       return state.name + '是个好人'
+    },
+    getAge (state) {
+      return state.name + '18岁了'
     }
   },
   mutations: {

@@ -2,17 +2,38 @@ let Vue
 
 class Store {
   constructor (options) {
-    console.log(options)
-    this.state = options.state
-    console.log(this.state)
+    // console.log(options)
+    // this.state = options.state
+    // 上面写法不是响应式的 所以需要放在vue 的data里
+    this._s = new Vue({
+      data: {
+        state: options.state
+      }
+    })
+    // console.log(this.state)
+    // 得到仓库的getters
+    let getters = options.getters || {}
+    // 这个是挂载getters
+    this.getters = {}
+    Object.keys(getters).forEach(getter => {
+      Object.defineProperty(this.getters, getter, {
+        get: () => {
+          console.log(this)
+          return getters[getter](this.state)
+        }
+      })
+    })
+  }
+  get state () {
+    return this._s.state
   }
 }
 const install =  (_Vue) => {
-  console.log('install')
+  // console.log('install')
   Vue = _Vue
   Vue.mixin({
     beforeCreate () {
-      console.log(this.$options)
+      // console.log(this.$options)
       if (this.$options && this.$options.store) { // 如果是main.js
         this.$store = this.$options.store
       } else {
