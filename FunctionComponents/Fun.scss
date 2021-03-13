@@ -1,0 +1,96 @@
+.wp {
+  border: 1px solid red;
+  width: 300px;
+  height: 300px;
+}
+
+.box {
+  background: rgb(228, 231, 18);    
+}
+
+.box.size{
+  width: 100px;
+  height: 100px;
+}
+/* 1. absolute + 负margin */
+.wp{
+  position: relative;
+}
+.box{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+}
+
+/* 2. absolute + margin auto */
+.wp {
+  position: relative;
+}
+.box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* 3. absolute + calc */
+.wp {
+  position: relative;
+}
+.box {
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}
+
+/* 4. absolute + transform */
+.wp {
+  position: relative;
+}
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 5. lineheight */
+.wp {
+  line-height: 300px;
+  text-align: center;
+  font-size: 0;
+}
+.box {
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: initial;
+  text-align: left
+}
+/* 6. css-table */
+.wp {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+.box {
+  display: inline-block;
+}
+.red {
+  color: red
+}
+
+.blue {
+  color: blue
+}
+/* 7. flex */
+.wp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

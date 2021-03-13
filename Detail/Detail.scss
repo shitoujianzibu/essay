@@ -1,0 +1,13 @@
+.image_wrapper{
+  position: absolute;
+  left: 0;
+  top: 100px;
+  visibility: hidden;
+  &.active {
+    visibility: visible;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
