@@ -1,6 +1,6 @@
 const promise1 = new Promise((resolve, reject) => {
   setTimeout(() => {
-    resolve(1)
+    reject(1)
   }, 1000)
 })
 const promise2 = new Promise((resolve, reject) => {
@@ -23,15 +23,19 @@ const promiseAll = function (list) {
     let index = 0
     const len = list.length
     for (let i = 0; i < len; i++) {
-      Promise.resolve(list[i]).then(result => {
-        arr[i] = result
-        if (++index === len) {
-          resolve(arr)
-        }
-      })
+      Promise.resolve(list[i])
+        .then(result => {
+          arr[i] = result
+          if (++index === len) {
+            resolve(arr)
+          }
+        })
+        .catch(reason => reject(reason) )
     }
   })
 }
 promiseAll([promise3, promise1, promise2]).then(result => {
   console.log(result)
+}).catch(reason => {
+  console.log(reason, '---')
 })
