@@ -8,8 +8,8 @@
 <body>
   <div id="app">
     {{msg}}
-    <a href="#/index">首页</a>
-    <a href="#/test">首页</a>
+    <a href="#/">首页</a>
+    <a href="#/test">test</a>
     <router-view></router-view>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
@@ -17,12 +17,9 @@
   <script src="./vue-fake-router.js"></script>
   <script>
     Vue.use(Router)
-    let router = new Router({
-      routes
-    })
-
-
+    let router = new Router({ routes })
     new Vue({
+      router,
       el: '#app',
       data: {
         msg: 'Hello Vue Router'
