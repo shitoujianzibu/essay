@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue-router</title>
+</head>
+<body>
+  <div id="app">
+    {{msg}}
+    <a href="#/index">首页</a>
+    <a href="#/test">首页</a>
+    <router-view></router-view>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="./route.js"></script>
+  <script src="./vue-fake-router.js"></script>
+  <script>
+    Vue.use(Router)
+    let router = new Router({
+      routes
+    })
+
+
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'Hello Vue Router'
+      }
+    })
+  </script>
+</body>
+</html>
