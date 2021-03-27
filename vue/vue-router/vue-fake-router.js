@@ -2,8 +2,10 @@ class Router {
   constructor ({ routes }) {
     this.routes = routes
     this.history = new History()
+    this.path = window.location.hash
     this.history.listen(path => {
       this.path = path
+      this.vm.$forceUpdate()
     })
   }
   init (vm) {
@@ -30,10 +32,17 @@ Router.install = function (Vue) {
   Vue.component('router-view', {
     functional: true,
     render (createElement, { props, children, parent, data }) {
+      const router = parent.$options.router
+      const routes = router.routes
+      const path = router.path
+      const matchedRoute = routes.find(route => {
+        return route.path.replace(/^\//, '') === path.replace(/^#\//, '')
+      })
+      const matchedRouteComponent = matchedRoute.component
       let comp = {
-        template: '<div>我是router-view</div>'
+        matchedRouteComponent
       }
-      return createElement(comp)
+      return createElement(matchedRouteComponent)
     }
   })
 }
